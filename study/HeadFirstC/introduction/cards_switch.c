@@ -10,25 +10,41 @@
 int main()
 {
 	char card_name[3];
-	puts("输入牌名：");
-	scanf("%2s", card_name);
-	int val = 0;
-	switch(card_name[0]) {
-		case 'K' :
-		case 'Q' :
-		case 'J' :
-			val = 10;
-			break;
-		case 'A' :
-			val = 11;
-			break;
-		default :
-			val = atoi(card_name);
+	int count = 0;
+	//检测输入字符
+	while('X' != card_name[0]) {	
+		puts("输入牌名：");
+		scanf("%2s", card_name);
+		int val = 0;
+		switch(card_name[0]) {
+			case 'K' :
+			case 'Q' :
+			case 'J' :
+				val = 10;
+				break;
+			case 'A' :
+				val = 11;
+				break;
+			case 'X' :
+				continue;
+			default :
+				val = atoi(card_name);
+				if ((val < 1) || (val > 10))
+				{
+					puts("输入错误牌");
+					continue;
+				}
+		}
+
+		if ((val > 2) && (val < 7)) {
+			count++;
+			puts("计数增加");
+		} else if (10 == val) {
+			count--;
+			puts("计数减少");
+		}
+
+		printf("当前计数：%d\n", count);
 	}
-	printf("%d",val);
-	if ((val > 2) && (val < 7))
-		puts("计数增加");
-	else if (10 == val)
-		puts("计数减少");
 	return 0;
 }
